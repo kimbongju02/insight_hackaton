@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,3 +122,14 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+PATH = {
+    'DATA_FOLDER' : os.path.join(BASE_DIR, 'data'),
+    'INPUT_AUDIOFILE' : os.path.join(BASE_DIR, 'data\\input_audio.mp3'),
+    'SAVE_STT_FILE' : os.path.join(BASE_DIR, 'data\\stt.txt'),
+    'SAVE_TTS_FILE' : os.path.join(BASE_DIR, 'data\\tts.mp3'),
+    'DATA_FOLDER' : os.path.join(BASE_DIR, 'data'),
+    'DATA_FOLDER' : os.path.join(BASE_DIR, 'data'),
+}
+if not os.path.exists(PATH.get('DATA_FOLDER')):
+    os.makedirs(PATH.get('DATA_FOLDER'), exist_ok=True)
