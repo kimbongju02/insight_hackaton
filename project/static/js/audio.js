@@ -1,4 +1,5 @@
 const recordButton = document.getElementById('recordButton');
+const audio = document.getElementById('audioPlayer');
 
 let mediaRecorder;
 
@@ -27,17 +28,21 @@ recordButton.addEventListener('click', () => {
                     body: formData
                 })
                 .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.text();
+                    return response.blob();
                 })
-                .then(data => {
-                    console.log('Success:', data);
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    audio.addEventListener('loadedmetadata', () => {
+                        const duration = audio.duration;
+                        console.log('음성 파일의 총 재생 시간:', duration, '초');
+                    });
+                    audio.src = url;
+                    audio.autoplay = true;
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
+                  
             };
             
             mediaRecorder.start();

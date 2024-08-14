@@ -4,8 +4,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.conf import settings
 from . import openai_api
+from django.http import FileResponse
 
 input_audiofile = settings.PATH.get('INPUT_AUDIOFILE')
+output_audiofile = settings.PATH.get('SAVE_TTS_FILE')
 
 @csrf_exempt
 def upload_audio(request):
@@ -17,5 +19,7 @@ def upload_audio(request):
         openai_api.stt()
         message = openai_api.text_generation()
         openai_api.tts(message)
-        return JsonResponse({'message': 'Audio uploaded successfully'})
-    return JsonResponse({'error': 'Invalid request'})
+
+        response = FileResponse(open(output_audiofile, 'rb'))
+
+        return response
