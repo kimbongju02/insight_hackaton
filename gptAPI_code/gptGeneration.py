@@ -3,10 +3,10 @@ from openai import OpenAI
 from dotenv import load_dotenv
 
 load_dotenv()
-API_KEY = os.environ.get('API_KEY')
+GPT_API_KEY = os.environ.get('GPT_API_KEY')
 
 client = OpenAI(
-  api_key=API_KEY
+  GPT_API_KEY=GPT_API_KEY
 )
 
 response = client.chat.completions.create(

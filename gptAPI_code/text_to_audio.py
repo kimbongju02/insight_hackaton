@@ -4,10 +4,10 @@ from openai import OpenAI
 from dotenv import load_dotenv
 
 load_dotenv()
-API_KEY = os.environ.get('API_KEY')
+GPT_API_KEY = os.environ.get('GPT_API_KEY')
 
 client = OpenAI(
-  api_key=API_KEY
+  api_key=GPT_API_KEY
 )
 
 speech_file_path = Path(__file__).parent / "speech.mp3"

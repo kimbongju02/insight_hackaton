@@ -5,23 +5,15 @@ from dotenv import load_dotenv
 from django.conf import settings
 
 load_dotenv()
-API_KEY = os.environ.get('API_KEY')
+GPT_API_KEY = os.environ.get('GPT_API_KEY')
 
 client = OpenAI(
-  api_key=API_KEY
+  api_key=GPT_API_KEY
 )
 
 input_audiofile = settings.PATH.get('INPUT_AUDIOFILE')
 save_stt_file = settings.PATH.get('SAVE_STT_FILE')
-save_tts_file = settings.PATH.get('SAVE_TTS_FILE')
 
-def tts(message):
-    response = client.audio.speech.create(
-        model="tts-1",
-        voice="alloy",
-        input=message
-    )
-    response.stream_to_file(save_tts_file)
     
 def stt():
     audio_file= open(input_audiofile, "rb")
