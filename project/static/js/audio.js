@@ -18,6 +18,7 @@ recordButton.addEventListener('click', () => {
         mediaRecorder.stop();
         recordIcon.className = 'fas fa-microphone';
     } else {
+        audio.pause();
         navigator.mediaDevices.getUserMedia({ audio: true })
         .then(stream => {
             mediaRecorder = new MediaRecorder(stream);
@@ -42,10 +43,6 @@ recordButton.addEventListener('click', () => {
                 })
                 .then(blob => {
                     const url = window.URL.createObjectURL(blob);
-                    audio.addEventListener('loadedmetadata', () => {
-                        const duration = audio.duration;
-                        console.log('음성 파일의 총 재생 시간:', duration, '초');
-                    });
 
                     // 녹음이 시작되면 랜덤 비디오로 배경 변경
                     const randomIndex = Math.floor(Math.random() * randomVideos.length);
@@ -67,16 +64,17 @@ recordButton.addEventListener('click', () => {
                     console.error('Error:', error);
                 });
                   
-            };
-
-            
-
-            
+            };            
             mediaRecorder.start();
             recordIcon.className = 'fas fa-stop';
         })
         .catch(err => {
             console.error('Error accessing media devices.', err);
         });
+
+        audio.onpause = function() {
+            backgroundVideo.src = originalVideoSource;
+            backgroundVideo.load();
+          };
     }
 });
