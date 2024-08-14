@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
+<<<<<<< HEAD
     <title>음성 녹음</title>
     <link rel="shortcut icon" href="#">
 </head>
@@ -10,3 +11,56 @@
         <script type="text/javascript" src="/static/js/audio.js"></script>
     </body>
 </html>
+=======
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>음성 녹음</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+           
+        }
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            
+            z-index: -1;
+        }
+        video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+        }
+        #recordButton {
+            position: relative;
+            z-index: 1;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+         <video class="video-background" autoplay loop muted>
+        <source src="/static/video/Idle_2.mp4" type="video/mp4">
+    </video>
+    </div>
+    <div class="container">
+        <button id="recordButton">녹음 시작/중지</button>
+    </div>
+    <script type='text/javascript' src="/static/js/audio.js"></script>
+</body>
+</html>
+>>>>>>> 4dcc310beacfe2bd07ddc7bd83e2d2ade4709663
